@@ -1,0 +1,137 @@
+.scroll-content {
+  background-color: #F1F5F8 !important;
+}
+.align-right {
+  text-align: right;
+}
+.align-left {
+  text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.big {
+    color: #b2b2b2;
+}
+.big:before{
+    font-size: 62px !important;
+}
+.title{
+  font-weight: lighter;
+  color: #FF3771;
+}
+.profile-image-container {
+    text-align: center;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+}
+.profile-image-icon {
+    width: 250px;
+    height: 250px;
+    text-align: center;
+    margin: 0 auto;
+}
+.profile-image-icon i {
+    font-size: 100px;
+    line-height: 250px;
+    color: #ff3771;
+}
+label span i {
+    padding: 10px;
+}
+.gallery-icon {
+    position: relative;
+    top: 25%;
+    font-size: 50px;
+    color: #FF3771;
+}
+td-cards {
+  display: block;
+  height: 350px;
+}
+
+td-card {
+  position: absolute;
+  left: 50%;
+  //margin-top: 80px;
+  margin-top: 8%;
+  margin-bottom: 40px;
+  margin-left: -150px;
+  width: 300px;
+  height: 300px;
+
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  background-color: white;
+}
+/*
+td-card.card-0 {
+  -webkit-transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, 0px, 0);
+  top: 0px;
+  z-index: 10;
+}
+td-card.card-1 {
+  -webkit-transform: translate3d(0, 4px, 0);
+  transform: translate3d(0, 4px, 0);
+  z-index: 9;
+}
+td-card.card-2 {
+  -webkit-transform: translate3d(0, 8px, 0);
+  transform: translate3d(0, 8px, 0);
+  z-index: 8;
+}
+*/
+
+td-cards {
+  display: block;
+}
+td-card {
+  display: block;
+}
+td-card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+td-card .image {
+  position: relative;
+}
+
+td-card img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.yes-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 30px;
+  color: rgb(111, 250, 111);
+  opacity: 0;
+}
+.no-text {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: rgb(255, 115, 115);
+  opacity: 0;
+}
+
+.fade {
+  -webkit-transition: 0.2s opacity linear;
+  transition: 0.2s opacity linear;
+  opacity: 0;
+}
+
+.again-container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+}
+.again-container button{
+    font-size: 50px;
+}

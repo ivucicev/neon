@@ -1,0 +1,2 @@
+#FF3771 main
+#F1F5F8 bg

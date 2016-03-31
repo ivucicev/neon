@@ -1,0 +1,51 @@
+<ion-view title="Profile">
+    <ion-nav-buttons side="right">
+        <a ui-sref="conversations" class="button button-icon button-calm icon ion-ios-chatbubble-outline"></a>
+    </ion-nav-buttons>
+    <ion-content padding="true">
+        <div>
+            <div class="row">
+                <div class="col">
+                    {{profileview.user.name}}&nbsp;{{profileview.user.age}}&nbsp;&amp;&nbsp;{{profileview.user.name_opt}}&nbsp;{{profileview.user.age_opt}}
+                </div>
+                <div class="col">
+                    {{profileview.user.profileType}}
+                </div>
+            </div>
+        </div>
+        <ion-slide-box show-pager="false" ng-show="profileview.slider">
+            <ion-slide ng-repeat="image in profileview.gallery" style="background-image: url({{image.image}}); width: 250px; height: 250px;background-size: cover;"></ion-slide>
+        </ion-slide-box>
+        <div>
+            <div class="row">
+                <div class="col">
+                    <small>Location</small>
+                </div>
+                <div class="col align-right">
+                    <small>Looking for</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{profileview.user.location.locationString}}
+                </div>
+                <div class="col align-right">
+                    <span ng-repeat="type in profileview.user.lookingFor">{{type}}</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>{{profileview.user.about}}</p>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-block button-clear button-large icon ion-ios-close-outline"></button>
+                </div>
+                <div class="col">
+                    <button class="button button-block button-clear button-large icon ion-ios-heart-outline"></button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

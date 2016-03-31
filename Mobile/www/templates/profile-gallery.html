@@ -1,0 +1,36 @@
+<ion-view title="Gallery">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-clear" ng-if="profileGallery.reordered" ng-click="profileGallery.saveOrder()">Save</button>
+    </ion-nav-buttons>
+    <ion-content padding="true" scroll="false">
+        <p ng-hide="profileGallery.gallery.length" class="text-center">
+            <span>
+                Gallery is currently empty, please add some photos.
+            </span>
+        </p>
+        <p ng-show="profileGallery.gallery.length >= 2" class="text-center">
+            <small>Drag images to reorder, tap to delete</small>
+        </p>
+        <div class="row containerVertical" style="flex-wrap: wrap;" id="container">
+            <div class="col col-33 oneItem text-center tracking" ng-repeat="gal in profileGallery.gallery track by $index | orderBy: gal.position" ng-click="profileGallery.showDelete(gal.id)"  data-id="{{gal.id}}">
+                <img ng-src="{{gal.image}}" width="{{profileGallery.itemHeight}}" height="{{profileGallery.itemHeight}}" />
+            </div>
+        </div>
+        <div class="row" ng-hide="profileGallery.gallery.length >= 6">
+            <div class="col-33 col-offset-33 oneItem text-center" ng-click="profileGallery.show()">
+                <i class="icon ion-plus-circled gallery-icon"></i>
+                <p>
+                    <small>Add Photo</small>
+                </p>
+            </div>
+        </div>
+        <div class="row" ng-show="profileGallery.gallery.length >= 6">
+            <div class="col-33 col-offset-33 text-center" ng-click="profileGallery.show()">
+                <i class="icon ion-alert-circled gallery-icon assertive"></i>
+                <p>
+                    <small>Limit reached 6/6</small>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

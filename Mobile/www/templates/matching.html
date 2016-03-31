@@ -1,0 +1,60 @@
+<ion-view title="Neon">
+    <ion-nav-buttons side="right">
+        <a ui-sref="matchList" class="button button-icon button-calm icon ion-ios-people"></a>
+        <a ui-sref="conversations" class="button button-icon button-calm  icon ion-chatbubbles"></a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="left">
+        <a ui-sref="settings" class="button button-calm button-icon icon ion-android-settings"></a>
+    </ion-nav-buttons>
+    <ion-content padding="true" scroll="false">
+        <div class="text-center again-container">
+            <button type="button" name="button" class="button button-large button-block button-clear button-positive button-icon icon ion-refresh" ng-click="matching.init()"></button>
+            <p ng-click="matching.init()">
+                No more matches :(
+                <small>
+                    <p>
+                        Tap to start all over
+                    </p>
+                </small>
+            </p>
+        </div>
+        <td-cards>
+            <td-card ng-repeat="card in matching.cards" on-destroy="matching.cardDestroyed($index)" on-swipe="matching.cardSwiped($index)" ui-sref="matchingUserProfile({id: card.id})">
+                <div class="row">
+                    <div class="col text-left">
+                        {{card.name}}
+                        <small>{{card.age}}</small>
+                        <span ng-if="card.name_opt && card.age_opt">&amp;</span>
+                        {{card.name_opt}}
+                        <small>{{card.age_opt}}</small>
+                    </div>
+                </div>
+                <div style="background: url({{card.profilePicture}}) center center; background-size: cover; height: 170px;" /></div>
+                <div class="row">
+                    <div class="col">
+                        Lives in
+                        <p>{{card.location.locationString}}</p>
+                    </div>
+                    <div class="col align-right">
+                        Looking for
+                        <p>{{card.lookingFor}}</p>
+                    </div>
+                </div>
+                <!-- {{card.id}} -->
+            </td-card>
+        </td-cards>
+        <div>
+            <div class="row text-center">
+                <div class="col">
+                    <i class="icon ion-ios-close-outline big"></i>
+                </div>
+                <div class="col">
+                    <img src="img/neon-logo.svg" height="60px"/>
+                </div>
+                <div class="col" ng-click="matching.likeUser(matching.cards[matching.cards.length - 1].id)">
+                    <i class="icon ion-ios-heart-outline big"></i>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

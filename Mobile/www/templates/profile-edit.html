@@ -1,0 +1,233 @@
+<ion-view title="My Profile">
+    <ion-nav-buttons side="primary">
+        <button class="button button-icon icon ion-images" ui-sref="profileGallery"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true">
+        <div ng-click="profile.show()" class="profile-image-container">
+            <img ng-show="profile.image" ng-src="{{profile.image}}" width="250" height="250" />
+            <div ng-hide="profile.image" class="profile-image-icon">
+                <i class="ion-camera"></i>
+            </div>
+        </div>
+        <form name="profileForm" ng-submit="profile.saveProfile()">
+            <br>
+            <ion-list>
+                <label class="item item-select" name="profileType">
+                    <span class="input-label">Profile Type</span>
+                    <select ng-model="profile.profileData.profileType" name="profileType" required>
+                        <option selected disabled>Select</option>
+                        <option value="couple">Couple</option>
+                        <option value="single_men">Single Men</option>
+                        <option value="single_women">Single Women</option>
+                    </select>
+                </label>
+            </ion-list>
+            <ion-list>
+                <label class="item item-select" name="lookingFor">
+                    <span class="input-label">Looking For</span>
+                    <select ng-model="profile.profileData.lookingFor" name="lookingFor" required>
+                        <option selected disabled>Select</option>
+                        <option value="couple">Couple</option>
+                        <option value="single_men">Single Men</option>
+                        <option value="single_women">Single Women</option>
+                    </select>
+                </label>
+            </ion-list>
+            <!-- <ion-list>
+                <ion-item class="separator text-center">Profile type</ion-item>
+                <ion-checkbox ng-model="profile.typeCouple" ng-change="profile.trackChanges()">Couple</ion-checkbox>
+                <ion-checkbox ng-model="profile.typeSingleWoman" ng-change="profile.trackChanges()">Single Woman</ion-checkbox>
+                <ion-checkbox ng-model="profile.typeSingleMen" ng-change="profile.trackChanges()">Single Men</ion-checkbox>
+            </ion-list>
+            <br>
+            <ion-list>
+                <ion-item class="separator text-center" ng-change="profile.trackChanges()">Looking for</ion-item>
+                <ion-checkbox ng-model="profile.lookingCouple" ng-change="profile.trackChanges()">Couple</ion-checkbox>
+                <ion-checkbox ng-model="profile.lookingSingleWoman" ng-change="profile.trackChanges()">Single Woman</ion-checkbox>
+                <ion-checkbox ng-model="profile.lookingSingleMen" ng-change="profile.trackChanges()">Single Men</ion-checkbox>
+            </ion-list> -->
+            <br>
+            <ion-list>
+                <ion-item class="separator text-center">You</ion-item>
+                <label class="item item-input">
+                    <input type="text" placeholder="Name" name="name" ng-model="profile.profileData.name" required>
+                    <span ng-show="profileForm.name.$touched">
+                        <i ng-show="profileForm.name.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="number" placeholder="Age" name="age" ng-model="profile.profileData.age" min="18" max="119" required>
+                    <span ng-show="profileForm.age.$touched">
+                        <i ng-show="profileForm.age.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+            </ion-list>
+            <br>
+            <ion-list ng-show="profile.profileData.profileType == 'couple'">
+                <ion-item class="separator text-center">Partner</ion-item>
+                <label class="item item-input">
+                    <input type="text" placeholder="Name" name="name_opt" ng-model="profile.profileData.name_opt" ng-required="profile.profileData.profileType == 'couple'">
+                    <span ng-show="profileForm.name_opt.$touched">
+                        <i ng-show="profileForm.name_opt.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="number" placeholder="Age" name="age_opt" ng-model="profile.profileData.age_opt" min="18" max="119" ng-required="profile.profileData.profileType == 'couple'">
+                    <span ng-show="profileForm.age_opt.$touched">
+                        <i ng-show="profileForm.age_opt.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+            </ion-list>
+            <br>
+            <ion-list>
+                <label class="item item-input" name="location">
+                    <input type="text" placeholder="Location (City name, Country)" name="location" ng-model="profile.profileData.locationTemp" ng-focus="profile.searchAddress()" required>
+                    <span ng-show="profileForm.location.$touched">
+                        <i ng-show="profileForm.location.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+                <label class="item item-input" name="about">
+                    <textarea placeholder="About me/us" rows="6" ng-model="profile.profileData.about" required name="about"></textarea>
+                    <span ng-show="profileForm.about.$touched">
+                        <i ng-show="profileForm.about.$invalid" class="ion-close assertive"></i>
+                    </span>
+                </label>
+            </ion-list>
+            <button class="button button-positive button-block" ng-disabled="profileForm.$invalid || !profile.image" type="submit">Save</button>
+        </form>
+    </ion-content>
+</ion-view>
+
+<!--
+
+<label class="item item-select" name="profileType">
+    <span class="input-label">Profile type</span>
+    <select ng-model="profile.profileData.profileType" name="profileType" required>
+        <option value="couple" ng-selected="1">Couple</option>
+        <option value="single_men">Single Men</option>
+        <option value="single_women">Single Women</option>
+    </select>
+</label>
+
+<ion-slide-box show-pager="false">
+  <ion-slide>
+      <div ng-click="profile.show()" class="profile-image-container">
+          <img ng-show="profile.image" ng-src="{{profile.image}}" width="250" height="250" />
+          <div ng-hide="profile.image" class="profile-image-icon">
+              <i class="ion-camera"></i>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col"></div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-chevron-right" ng-click="profile.next()" name="button">Next</button>
+          </div>
+      </div>
+  </ion-slide>
+  <ion-slide>
+      <ion-list>
+          <ion-item class="separator text-center">Profile type</ion-item>
+          <ion-checkbox>Couple</ion-checkbox>
+          <ion-checkbox>Single Woman</ion-checkbox>
+          <ion-checkbox>Single Men</ion-checkbox>
+      </ion-list>
+      <div class="row">
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-left ion-chevron-left" name="button" ng-click="profile.back()">Back</button>
+          </div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-chevron-right" ng-click="profile.next()" name="button">Next</button>
+          </div>
+      </div>
+  </ion-slide>
+  <ion-slide>
+      <ion-list>
+          <ion-item class="separator text-center">You</ion-item>
+          <label class="item item-input">
+              <input type="text" placeholder="Name" name="name" ng-model="profile.profileData.name" required>
+              <span ng-show="profileForm.name.$touched">
+                  <i ng-show="profileForm.name.$invalid" class="ion-close assertive"></i>
+              </span>
+          </label>
+          <label class="item item-input">
+              <input type="number" placeholder="Age" name="age" ng-model="profile.profileData.age" min="18" max="119" required>
+              <span ng-show="profileForm.age.$touched">
+                  <i ng-show="profileForm.age.$invalid" class="ion-close assertive"></i>
+              </span>
+          </label>
+      </ion-list>
+      <div class="row">
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-left ion-chevron-left" name="button" ng-click="profile.back()">Back</button>
+          </div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-chevron-right" ng-click="profile.next()" name="button">Next</button>
+          </div>
+      </div>
+  </ion-slide>
+  <ion-slide>
+      <ion-list>
+          <ion-item class="separator text-center">Partner</ion-item>
+          <label class="item item-input">
+              <input type="text" placeholder="Name" name="name_opt" ng-model="profile.profileData.name_opt" required>
+              <span ng-show="profileForm.name_opt.$touched">
+                  <i ng-show="profileForm.name_opt.$invalid" class="ion-close assertive"></i>
+              </span>
+          </label>
+          <label class="item item-input">
+              <input type="number" placeholder="Age" name="age_opt" ng-model="profile.profileData.age_opt" min="18" max="119" required>
+              <span ng-show="profileForm.age_opt.$touched">
+                  <i ng-show="profileForm.age_opt.$invalid" class="ion-close assertive"></i>
+              </span>
+          </label>
+      </ion-list>
+      <div class="row">
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-left ion-chevron-left" name="button" ng-click="profile.back()">Back</button>
+          </div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-chevron-right" ng-click="profile.next()" name="button">Next</button>
+          </div>
+      </div>
+  </ion-slide>
+  <ion-slide>
+      <ion-list>
+          <ion-item class="separator text-center">Looking for</ion-item>
+          <ion-checkbox>Couple</ion-checkbox>
+          <ion-checkbox>Single Woman</ion-checkbox>
+          <ion-checkbox>Single Men</ion-checkbox>
+      </ion-list>
+      <div class="row">
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-left ion-chevron-left" name="button" ng-click="profile.back()">Back</button>
+          </div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-chevron-right" ng-click="profile.next()" name="button">Next</button>
+          </div>
+      </div>
+  </ion-slide>
+  <ion-slide>
+      <ion-list>
+      <label class="item item-input" name="location">
+          <input type="text" placeholder="Location (City name, Country)" name="location" ng-model="profile.profileData.locationTemp" ng-focus="profile.searchAddress()" required>
+          <span ng-show="profileForm.location.$touched">
+              <i ng-show="profileForm.location.$invalid" class="ion-close assertive"></i>
+          </span>
+      </label>
+      <label class="item item-input" name="about">
+          <textarea placeholder="About me/us" rows="6" ng-model="profile.profileData.about" required name="about"></textarea>
+          <span ng-show="profileForm.about.$touched">
+              <i ng-show="profileForm.about.$invalid" class="ion-close assertive"></i>
+          </span>
+      </label>
+      <div class="row">
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-left ion-chevron-left" name="button" ng-click="profile.back()">Back</button>
+          </div>
+          <div class="col">
+            <button type="button" class="button button-block button-positive button-clear icon icon-right ion-checkmark" ng-click="profile.next()" name="button">Save</button>
+          </div>
+      </div>
+  </ion-list>
+  </ion-slide>
+</ion-slide-box> -->
