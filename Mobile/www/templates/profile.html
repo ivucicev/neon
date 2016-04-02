@@ -1,22 +1,21 @@
 <ion-view title="Profile">
-    <ion-nav-buttons side="right">
+    <!-- <ion-nav-buttons side="right">
         <a ui-sref="conversations" class="button button-icon button-calm icon ion-ios-chatbubble-outline"></a>
-    </ion-nav-buttons>
-    <ion-content padding="true">
-        <div>
+    </ion-nav-buttons> -->
+    <ion-content padding="false">
+        <ion-slide-box show-pager="false" ng-show="profileview.slider">
+            <ion-slide ng-repeat="image in profileview.gallery | orderBy: image.position" style="background-image: url({{image.image}}); width: 100%; height: 300px;background-size: cover; background-color: white;"></ion-slide>
+        </ion-slide-box>
+        <div class="info-container">
             <div class="row">
                 <div class="col">
-                    {{profileview.user.name}}&nbsp;{{profileview.user.age}}&nbsp;&amp;&nbsp;{{profileview.user.name_opt}}&nbsp;{{profileview.user.age_opt}}
+                    {{profileview.user.name}}&nbsp;{{profileview.user.age}}
+                    <span ng-if="profile.user.name_opt">&nbsp;&amp;&nbsp;{{profileview.user.name_opt}}&nbsp;{{profileview.user.age_opt}}</span>
                 </div>
-                <div class="col">
-                    {{profileview.user.profileType}}
+                <div class="col text-right">
+                    {{profileview.user.profileType | EnumTypes}}
                 </div>
             </div>
-        </div>
-        <ion-slide-box show-pager="false" ng-show="profileview.slider">
-            <ion-slide ng-repeat="image in profileview.gallery" style="background-image: url({{image.image}}); width: 250px; height: 250px;background-size: cover;"></ion-slide>
-        </ion-slide-box>
-        <div>
             <div class="row">
                 <div class="col">
                     <small>Location</small>
@@ -30,12 +29,12 @@
                     {{profileview.user.location.locationString}}
                 </div>
                 <div class="col align-right">
-                    <span ng-repeat="type in profileview.user.lookingFor">{{type}}</span>
+                    <span ng-repeat="type in profileview.user.lookingFor">{{type | EnumTypes}}</span>
                 </div>
             </div>
-        </div>
-        <div>
-            <p>{{profileview.user.about}}</p>
+            <div class="about">
+                <p>{{profileview.user.about}}</p>
+            </div>
         </div>
         <div>
             <div class="row">

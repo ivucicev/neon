@@ -1,15 +1,14 @@
 <ion-view hide-nav-bar="true">
     <ion-content overflow-scroll="true" padding="true">
-      <div style="text-align: center">
-        <img src="img/neon-logo.svg" height="100px"/>
-        <h1 class="title">Neon</h1>
-        <p>
-          Meet your swing partners and just have fun.
-        </p>
-      </div>
+        <div style="text-align: center">
+            <img class="headline-padding" src="img/neon-logo-full.svg" height="50px"/>
+            <p>
+                Meet your swing partners and just have fun.
+            </p>
+        </div>
         <form class="list" name="loginForm" ng-submit="login.login()">
             <label class="item item-input">
-                <input type="text" ng-model="login.loginData.username" placeholder="username" required>
+                <input type="text" ng-model="login.loginData.username" placeholder="username" autocapitalize="none" required>
             </label>
             <label class="item item-input">
                 <input type="password" ng-model="login.loginData.password" placeholder="password" required>
@@ -17,15 +16,15 @@
             <button type="submit" class="button button-positive button-block icon icon-right" ng-disabled="loginForm.$invalid">Login</button>
             <div class="row">
               <div class="col">
-                <a ui-sref="passwordReset" class="button button-stable button-clear button-block button-small align-left">Forgot password?</a>
-              </div>
-              <div class="col">
-                <a ui-sref="register" class="button button-stable button-clear button-block button-small align-right">Not a member? <b>Register here!</b></a>
+                <a ui-sref="register" class="button button-stable button-clear button-block button-small">Not a member? <b>Register here!</b></a>
               </div>
             </div>
         </form>
-        <button class="button button-stable button-icon button-block  icon ion-social-facebook"></button>
-        <button ui-sref="profileEdit" class="button button-stable button-icon button-block" name="button">Profile</button>
-        <button ui-sref="matching" class="button button-stable button-icon button-block" name="button">Profile</button>
+        <div class="row forgot-bottom hide-on-keyboard-open">
+            <div class="col">
+                <a ui-sref="forgotPassword" class="button button-stable button-clear button-block button-small">Forgot password?</a>
+            </div>
+        </div>
+        <!-- <button class="button button-stable button-icon button-block  icon ion-social-facebook"></button> -->
     </ion-content>
 </ion-view>

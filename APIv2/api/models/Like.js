@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-module.exports = {
+var Like = module.exports = {
   attributes: {
       liker: {
           type: 'string',

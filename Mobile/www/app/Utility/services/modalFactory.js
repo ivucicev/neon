@@ -7,7 +7,7 @@ angular.module('Utility')
             if (typeof animation == 'undefined' || animation == false || animation === null) {
                 animate = 'slide-in-up';
             }
-            mod = $ionicModal.fromTemplateUrl('templates/_modals/' + template, {
+            mod = $ionicModal.fromTemplateUrl('templates/' + template, {
                     scope: data,
                     animation: animate
             }).then(function(modal) {

@@ -22,8 +22,8 @@
             load.hide();
             $jrCrop.crop({
                 url: 'data:image/jpg;base64,' + image,
-                width: 500,
-                height: 500
+                width: 300,
+                height: 300
             }).then(function(canvas) {
                 self.image = canvas.toDataURL();
             }, function() {
@@ -49,7 +49,7 @@
         this.show = function() {
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text: '<b>Take new photo</b>' },
+                    { text: '<b><span class="positive">Take new photo</span></b>' },
                     { text: 'Choose photo from gallery' }
                 ],
                 titleText: 'Profile picture',
@@ -73,6 +73,8 @@
                 locationString: loc,
                 locationId: self.placeId
             };
+            self.profileData.locationLat = self.latitude;
+            self.profileData.locationLng = self.longitude;
             self.profileData.active = 1;
             self.profileData.loggedIn = 1;
             delete self.profileData.locationTemp;
@@ -88,13 +90,20 @@
                 load.show('Something went wrong, please try again', 'fail');
             });
         };
+        $scope.$on('$ionicView.beforeLeave', function() {
+            storage.save("user", self.profileData);
+        });
         $scope.$on('$ionicView.beforeEnter', function() {
             var user = storage.get("user");
             user.age = parseInt(user.age);
             user.age_opt = parseInt(user.age_opt);
             self.image = user.profilePicture;
             self.profileData = user || {};
-            self.profileData.locationTemp = user.location.locationString;
+            try {
+                self.profileData.locationTemp = user.location.locationString;
+            } catch (e) {
+                self.profileData.locationTemp = null;
+            }
         });
     }
 })();

@@ -18,7 +18,7 @@
                     { text: '<b><span class="positive">Take new photo</span></b>' },
                     { text: 'Choose photo from gallery' }
                 ],
-                titleText: 'Profile picture',
+                titleText: 'Gallery picture',
                 cancelText: '<span class="assertive">Cancel</span>',
                 cancel: function() {
                     hideSheet();
@@ -112,6 +112,8 @@
                 if (res.data.length) {
                     storage.save("gallery", res.data);
                     self.gallery = res.data;
+                } else {
+                    storage.remove("gallery");
                 }
                 load.hide();
             }, function(e) {
@@ -119,6 +121,7 @@
             });
         };
         this.init = function() {
+            // problem here, gallery if there is gallery in local storage...
             self.gallery = storage.get("gallery") || [];
             if (!self.gallery.length) self.getGallery();
             angular.forEach(document.getElementsByClassName('oneItem'), function(elm) {

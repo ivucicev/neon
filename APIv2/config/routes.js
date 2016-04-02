@@ -37,8 +37,10 @@ module.exports.routes = {
   },
   'GET /email-available/:email': 'AuthController.checkEmailAvailability',
   'GET /username-available/:username': 'AuthController.checkUsernameAvailability',
-  'POST /login': 'AuthController.login'
-
+  'POST /login': 'AuthController.login',
+  //likes
+  'POST /like': 'LikeController.like',
+  'GET /match-list/:page': 'MatchController.getMatchList'
   /***************************************************************************
    *                                                                          *
    * Custom routes here...                                                    *

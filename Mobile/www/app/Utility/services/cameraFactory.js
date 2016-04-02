@@ -11,8 +11,8 @@
 						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: lib ? 0 : 1,
 						encodingType: 0,
-						targetWidth: 1024,
-						targetHeight: 1024,
+						targetWidth: 350,
+						targetHeight: 350,
 						saveToPhotoAlbum: false,
 						correctOrientation: true
 				    };

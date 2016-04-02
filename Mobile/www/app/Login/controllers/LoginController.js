@@ -16,6 +16,7 @@
                         historyRoot: true,
                         disableBack: true
                     });
+                    storage.remove("gallery");
                     if (res.data.user.active == 1) {
                         $state.go('matching');
                     } else {

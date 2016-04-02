@@ -1,10 +1,20 @@
 <ion-view title="Settings">
     <ion-content padding="true">
-        <a ui-sref="profileEdit" class="button button-stable button-block">Profile</a>
-        <a ui-sref="account" class="button button-stable button-block ">Account</a>
-        <div class="spacer" style="width: 300px; height: 48px;"></div>
-        <button class="button button-stable button-block ">Share</button>
-        <div class="spacer" style="height: 100px;"></div>
-        <button class="button button-stable button-block" ng-click="settings.logout()">Logout</button>
+        <div class="text-center">
+            <br><br>
+            <img ng-src="{{settings.profileImage}}" height="150px" style="border-radius: 50%; border: 3px solid #B6B6B7;" alt="" />
+            <br>
+        </div>
+        <div class="text-center row">
+            <div class="col-25"></div>
+            <div class="col-50">
+                <a ui-sref="profileEdit" class="button button-stable button-block button-clear icon icon-left ion-ios-person-outline">Profile</a>
+                <a ui-sref="account" class="button button-stable button-block button-clear icon icon-left ion-ios-eye-outline">Account</a>
+                <button class="button button-stable button-block button-clear icon icon-left ion-ios-upload-outline" ng-click="settings.share()">Share</button>
+                <a href="mailto:support@neon.com?subject=Help&Support" class="button button-stable button-block button-clear icon icon-left ion-ios-help-outline">Need Help?</a>
+                <button class="button button-stable button-block button-clear icon icon-left ion-ios-undo-outline" ng-click="settings.logout()">Logout</button>
+            </div>
+            <div class="col-25"></div>
+        </div>
     </ion-content>
 </ion-view>

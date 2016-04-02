@@ -8,9 +8,11 @@
     </ion-nav-buttons>
     <ion-content padding="true" scroll="false">
         <div class="text-center again-container">
-            <button type="button" name="button" class="button button-large button-block button-clear button-positive button-icon icon ion-refresh" ng-click="matching.init()"></button>
+            <button type="button" name="button" class="button button-large button-block button-clear button-positive button-icon" ng-click="matching.init()">
+                 <img src="./img/ico/badley.svg" height="35px" />
+            </button>
             <p ng-click="matching.init()">
-                No more matches :(
+                No more matches
                 <small>
                     <p>
                         Tap to start all over
@@ -28,6 +30,9 @@
                         {{card.name_opt}}
                         <small>{{card.age_opt}}</small>
                     </div>
+                    <div class="col text-right">
+                        {{card.profileType | EnumTypes}}
+                    </div>
                 </div>
                 <div style="background: url({{card.profilePicture}}) center center; background-size: cover; height: 170px;" /></div>
                 <div class="row">
@@ -37,7 +42,7 @@
                     </div>
                     <div class="col align-right">
                         Looking for
-                        <p>{{card.lookingFor}}</p>
+                        <p ng-repeat="type in card.lookingFor">{{type | EnumTypes}}</p>
                     </div>
                 </div>
                 <!-- {{card.id}} -->

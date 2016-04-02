@@ -19,7 +19,9 @@
                         ng-keyup="registerForm.username.$valid ? register.validateUsername(): ''"
                         ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9_]{6,16}$/"
                         ng-minlength="6"
-                        ng-maxlength="16" required>
+                        ng-maxlength="16"
+                        autocapitalize="none"
+                        required>
                     <span ng-show="registerForm.username.$touched && !register.validatingUsername">
                         <i ng-show="registerForm.username.$invalid || register.usernameTaken" class="ion-close assertive"></i>
                         <i ng-show="registerForm.username.$valid && !register.usernameTaken" class="ion-checkmark positive"></i>
@@ -44,10 +46,10 @@
                         <i ng-show="registerForm.passwordRepeat.$valid && (register.registerData.password == register.registerData.repeatPassword)" class="ion-checkmark positive"></i>
                     </span>
                 </label>
-                <ion-checkbox name="terms" ng-model="register.terms" ng-init="register.terms = false">I accept terms &amp; conditions</ion-checkbox>
+                <ion-checkbox  ng-click="register.readTerms()" name="terms" ng-model="register.terms" ng-init="register.terms = false">I accept terms &amp; conditions</ion-checkbox>
             </ion-list>
             <button class="button button-positive button-block" type="submit" ng-disabled="registerForm.$invalid || (register.registerData.password != register.registerData.repeatPassword) || register.emailTaken || register.usernameTaken || register.terms==false">Register</button>
-            <button class="button button-stable button-icon button-block  icon ion-social-facebook"></button>
+            <!-- <button class="button button-stable button-icon button-block  icon ion-social-facebook"></button> -->
         </form>
     </ion-content>
 </ion-view>

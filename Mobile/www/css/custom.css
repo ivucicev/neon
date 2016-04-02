@@ -135,3 +135,64 @@ td-card img {
 .again-container button{
     font-size: 50px;
 }
+
+/*  custom loading bar */
+.bar.bar-loading {
+  display: block;
+  height: 24px;
+
+  /* starts right below a normal header */
+  top: 44px;
+
+  /* make the text centered vertically and horizontally */
+  text-align: center;
+  padding: 0;
+  line-height: 24px;
+
+  /* transition 'sliding down' (check below)*/
+  -webkit-transition: 200ms all;
+  background-color: #B24CD8;
+}
+.platform-ios .bar.bar-loading {
+    top: 64px !important;
+}
+
+/*
+ * make the content's top changes animate.
+ * might not always look good, but looks
+ * good when our loader is added & removed
+ */
+.has-header {
+  -webkit-transition: 200ms top;
+}
+.has-header.has-loading {
+  /* 44px (header) + 24px */
+  top: 68px;
+}
+
+/* make loading bar slide up/down */
+.bar-loading.ng-enter,
+.bar-loading.ng-leave.ng-leave-active {
+  height: 0;
+  border-width: 0px;
+}
+.bar-loading.ng-enter.ng-enter-active,
+.bar-loading.ng-leave {
+  height: 24px;
+  border-width: 1px;
+}
+.info-container {
+    background-color: white;
+}
+.info-container .about {
+    padding: 10px;
+    text-align: justify;
+}
+.headline-padding {
+    margin-top: 45px;
+    margin-bottom: 30px;
+}
+.forgot-bottom {
+    position: absolute;
+    bottom: 20px;
+}

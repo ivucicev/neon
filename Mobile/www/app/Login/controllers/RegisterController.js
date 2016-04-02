@@ -1,13 +1,19 @@
 (function() {
     'use strict';
     angular.module('Login')
-        .controller('RegisterController', ['http', 'load', '$state', RegisterController]);
-    function RegisterController(http, load, $state) {
+        .controller('RegisterController', ['http', 'load', '$state', 'modal', RegisterController]);
+    function RegisterController(http, load, $state, modal) {
         var that = this;
         this.validatingEmail = false;
         this.validatingUsername = false;
         this.emailTaken = false;
         this.usernameTaken = false;
+        this.readTerms = function() {
+            modal.reveal('_termsModal.html');
+        };
+        this.closeTerms = function() {
+            modal.destroy();
+        };
         this.validateEmail = function() {
             that.validatingEmail = true;
             http.get('email-available/' + that.registerData.email).then(function(res) {

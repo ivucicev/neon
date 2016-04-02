@@ -97,6 +97,12 @@ var User = module.exports = {
     location: {
       model: 'location'
     },
+    locationLat: {
+      type: 'string',
+    },
+    locationLng: {
+      type: 'string',
+    },
     visible: {
         type: 'int',
         enum: [0, 1],
@@ -106,6 +112,9 @@ var User = module.exports = {
         type: 'int',
         enum: [0, 1],
         defaultsTo: 1
+    },
+    matches: {
+        type: 'array',
     },
     gallery: {
       collection: 'gallery',
