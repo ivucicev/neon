@@ -6,6 +6,6 @@
     angular.module('neonApp')
     .constant('DEBUG', true)
     .constant('URL', {
-        'API': local
+        'API': aws
     });
 })();

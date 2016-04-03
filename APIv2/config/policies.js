@@ -31,7 +31,8 @@ module.exports.policies = {
     '*': true
   },
   UserController: {
-    'create': true
+    'create': true,
+    'getProfilePicture': true
   }
   /***************************************************************************
    *                                                                          *
