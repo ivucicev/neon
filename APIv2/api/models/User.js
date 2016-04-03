@@ -103,6 +103,9 @@ var User = module.exports = {
     locationLng: {
       type: 'string',
     },
+    locationString: {
+      type: 'string'
+    },
     visible: {
         type: 'int',
         enum: [0, 1],
@@ -123,6 +126,7 @@ var User = module.exports = {
     toJSON: function() {
       var user = this.toObject();
       delete user.password;
+      delete user.profilePicture;
       delete user.gallery;
       return user;
     },

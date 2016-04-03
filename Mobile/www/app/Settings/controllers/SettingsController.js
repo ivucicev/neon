@@ -27,16 +27,8 @@
                 load.hide();
             }
         };
-        this.needHelp = function() {
-            load.show();
-            try {
-
-            } catch (e) {
-                load.hide();
-            }
-        };
         $scope.$on('$ionicView.beforeEnter', function() {
-            self.profileImage = storage.get("user").profilePicture;
+            self.profilePicture = storage.get("profilePicture");
         });
     }
 })();

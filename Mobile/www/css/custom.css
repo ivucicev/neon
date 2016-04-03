@@ -196,3 +196,32 @@ td-card img {
     position: absolute;
     bottom: 20px;
 }
+.image-loader-container {
+    position: absolute;
+    left: 25px;
+}
+.image-loader-container .spinner{
+    stroke: #FF3771;
+}
+.item i {
+    color: #FF3771;
+}
+.td-card .image-loader-container {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+.custom-footer {
+    height: 90px;
+}
+.custom-footer .controls-container {
+    width: 100%;
+}
+.settings-image-container .image-loader-container {
+    width: 100%;
+    text-align: center;
+    top: 20%;
+    left: 0;
+}

@@ -7,6 +7,7 @@
         'Login',
         'Profile',
         'Matching',
-        'Settings'
+        'Settings',
+        'ionicLazyLoad'
     ]);
 })();

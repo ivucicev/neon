@@ -38,6 +38,7 @@ module.exports.routes = {
   'GET /email-available/:email': 'AuthController.checkEmailAvailability',
   'GET /username-available/:username': 'AuthController.checkUsernameAvailability',
   'POST /login': 'AuthController.login',
+  'GET /profile/:id': 'UserController.getProfilePicture',
   //likes
   'POST /like': 'LikeController.like',
   'GET /match-list/:page': 'MatchController.getMatchList'

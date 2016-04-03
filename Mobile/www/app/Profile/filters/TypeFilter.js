@@ -6,9 +6,9 @@
         return function(type) {
             switch (type) {
                 case 'single_men':
-                    return 'Single Men';
+                    return 'Single Men <img src=\"img/ico/male.svg\" height=\"16px\" />';
                 case 'single_women':
-                    return 'Single Woman';
+                    return 'Single Women <img src=\"img/ico/female.svg\" height=\"16px\" />';
                 case 'couple':
                     return 'Couple';
                 default:

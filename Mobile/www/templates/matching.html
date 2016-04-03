@@ -21,7 +21,7 @@
             </p>
         </div>
         <td-cards>
-            <td-card ng-repeat="card in matching.cards" on-destroy="matching.cardDestroyed($index)" on-swipe="matching.cardSwiped($index)" ui-sref="matchingUserProfile({id: card.id})">
+            <td-card ng-repeat="card in matching.cards" on-destroy="matching.cardDestroyed($index)" on-swipe="matching.cardSwiped($index)" ui-sref="matchingUserProfile({id: card.id, fromList: 0})">
                 <div class="row">
                     <div class="col text-left">
                         {{card.name}}
@@ -30,25 +30,29 @@
                         {{card.name_opt}}
                         <small>{{card.age_opt}}</small>
                     </div>
-                    <div class="col text-right">
-                        {{card.profileType | EnumTypes}}
+                    <div class="col text-right" ng-bind-html="card.profileType | EnumTypes">
                     </div>
                 </div>
-                <div style="background: url({{card.profilePicture}}) center center; background-size: cover; height: 170px;" /></div>
+                <div image-lazy-src="{{matching.getPhoto}}profile/{{card.id}}" image-lazy-loader="lines" image-lazy-background-image="true" style="background: url() center center; background-size: cover; height: 170px;" /></div>
                 <div class="row">
                     <div class="col">
                         Lives in
-                        <p>{{card.location.locationString}}</p>
+                        <p style="margin-bottom: 0">{{card.locationString}}</p>
+                        <small>
+                            <img src="./img/ico/location.svg" height="15px" alt="" />&nbsp;{{card.distance}} Km
+                        </small>
                     </div>
                     <div class="col align-right">
                         Looking for
-                        <p ng-repeat="type in card.lookingFor">{{type | EnumTypes}}</p>
+                        <p ng-repeat="type in card.lookingFor" ng-bind-html="type | EnumTypes"></p>
                     </div>
                 </div>
                 <!-- {{card.id}} -->
             </td-card>
         </td-cards>
-        <div>
+    </ion-content>
+    <ion-footer-bar class="custom-footer">
+        <div class="controls-container">
             <div class="row text-center">
                 <div class="col">
                     <i class="icon ion-ios-close-outline big"></i>
@@ -61,5 +65,5 @@
                 </div>
             </div>
         </div>
-    </ion-content>
+    </ion-footer-bar>
 </ion-view>

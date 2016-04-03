@@ -11,6 +11,9 @@
             load.show('Something went wrong', 'fail');
             $ionicHistory.goBack();
         };
+        if (parseInt($state.params.fromList)) {
+            self.matched = 1;
+        } else self.matched = 0;
         this.init = function() {
             load.show();
             http.get('user/' + $state.params.id).then(function(user) {

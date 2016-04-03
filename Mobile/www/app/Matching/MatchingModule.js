@@ -11,10 +11,16 @@
             controllerAs: 'matching'
         })
         .state('matchingUserProfile', {
-            url: '/matching-user-profile/:id',
+            url: '/matching-user-profile/:id/:fromList',
             templateUrl: 'templates/profile.html',
             controller: 'ProfileViewController',
             controllerAs: 'profileview'
+        })
+        .state('matchList', {
+            url: '/matching-list',
+            templateUrl: 'templates/matchList.html',
+            controller: 'MatchListController',
+            controllerAs: 'list'
         });
     }
 })();

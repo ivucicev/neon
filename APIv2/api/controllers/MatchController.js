@@ -19,6 +19,7 @@ module.exports = {
 		this._profileType = req.session.user.profileType;
 		this._locationLat = req.session.user.locationLat;
 		this._locationLng = req.session.user.locationLng;
+		this._matches = req.session.user.matches;
 		User.find({
 			id: { '!' : that._user },
 			active: "1",
@@ -32,15 +33,34 @@ module.exports = {
 			users.forEach(function(user) {
 				console.log(user.location);
 				console.log(that._lookingFor, user.profileType, that._lookingFor.indexOf(user.profileType) == -1, user.lookingFor, that._profileType, user.lookingFor.indexOf(that._profileType) == -1);
-				if (that._lookingFor.indexOf(user.profileType) == -1 || user.lookingFor.indexOf(that._profileType) == -1) {
-					delete users[idx];
+				try {
+					console.log("match", that._matches, user.id, that._matches.indexOf(user.id));
+					if (that._matches.indexOf(user.id) > -1) {
+						users.splice(idx, 1);
+						idx++;
+						return;
+					}
+				} catch(e) {
+					console.log(e);
+				}
+				if (that._lookingFor.indexOf(user.profileType) == -1) {
+					users.splice(idx, 1);
+					idx++;
+					return;
+				}
+				if (user.lookingFor.indexOf(that._profileType) == -1) {
+					users.splice(idx, 1);
+					idx++;
+					return;
 				}
 				try {
 					if (user.locationLng && that._locationLng && user.locationLat && that._locationLat) {
 						var dist = that._calculateDistance(user.locationLat, user.locationLng, that._locationLat, that._locationLng);
 						if (dist) {
 							if ((dist > that._distance)) {
-								delete users[idx];
+								users.splice(idx, 1);
+								idx++;
+								return;
 							} else {
 								users[idx].distance = Math.round(dist);
 							}

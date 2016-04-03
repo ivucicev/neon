@@ -26,6 +26,7 @@
                 height: 300
             }).then(function(canvas) {
                 self.image = canvas.toDataURL();
+                storage.save("profilePicture", self.image);
             }, function() {
             });
         };
@@ -75,6 +76,7 @@
             };
             self.profileData.locationLat = self.latitude;
             self.profileData.locationLng = self.longitude;
+            self.profileData.locationString = loc;
             self.profileData.active = 1;
             self.profileData.loggedIn = 1;
             delete self.profileData.locationTemp;
@@ -97,7 +99,7 @@
             var user = storage.get("user");
             user.age = parseInt(user.age);
             user.age_opt = parseInt(user.age_opt);
-            self.image = user.profilePicture;
+            self.image = storage.get("profilePicture");
             self.profileData = user || {};
             try {
                 self.profileData.locationTemp = user.location.locationString;

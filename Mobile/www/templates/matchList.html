@@ -1,20 +1,17 @@
 <ion-view title="Match list">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="list.init()">
+        </ion-refresher>
         <ion-list>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>Title</h2>
-                <p>Item</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>Title</h2>
-                <p>Item</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>Title</h2>
-                <p>Item</p>
+            <ion-item class="item-avatar item-icon-right" ng-repeat="user in list.matches" ui-sref="matchingUserProfile({id: user.id, fromList: 1})">
+                <img image-lazy-src="{{list.getPhoto}}profile/{{user.id}}" image-lazy-loader="lines">
+                <h2>{{user.name}}&nbsp;{{user.age}}
+                    <span ng-if="profile.user.name_opt">&nbsp;&amp;&nbsp;{{user.name_opt}}&nbsp;{{user.age_opt}}</span>
+                </h2>
+                <p>{{user.about}}</p>
+                <i class="icon ion-chevron-right"></i>
             </ion-item>
         </ion-list>
     </ion-content>

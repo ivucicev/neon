@@ -2,12 +2,16 @@
     angular.module('neonApp')
     .run(function($rootScope, $cordovaNetwork, $ionicPlatform, $cordovaKeyboard) {
         $ionicPlatform.ready(function() {
-            $cordovaKeyboard.hideAccessoryBar(true);
-            $cordovaKeyboard.disableScroll(true);
-            $ionicPlatform.onHardwareBackButton(function() {
-                //this will ignore backbutton on android devices
-                return;
-            });
+            try {
+                $cordovaKeyboard.hideAccessoryBar(true);
+                $cordovaKeyboard.disableScroll(true);
+                $ionicPlatform.onHardwareBackButton(function() {
+                    //this will ignore backbutton on android devices
+                    return;
+                });
+            } catch (e) {
+                // ignore
+            }
             $rootScope.networkOffline = false;
             try {
                 // listen for Online event

@@ -1,5 +1,9 @@
 <ion-view title="Conversations">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="list.init()">
+        </ion-refresher>
         <ion-list>
             <ion-item class="item-thumbnail-left">
                 <img>
