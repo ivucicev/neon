@@ -39,22 +39,28 @@ module.exports = {
 			users.forEach(function(user) {
 				console.log(user.location);
 				console.log(that._lookingFor, user.profileType, that._lookingFor.indexOf(user.profileType) == -1, user.lookingFor, that._profileType, user.lookingFor.indexOf(that._profileType) == -1);
+				console.log(" *** BEGIN MATCH *** ");
+				console.log(" *** USER MATCHING (CURRENT) *** ", that._user, that._profileType, that._lookingFor);
+				console.log(" *** USER TRYING TO MATCH *** ", user.id, user.profileType, user.lookingFor);
 				try {
-					console.log("match", that._matches, user.id, that._matches.indexOf(user.id));
 					if (that._matches.indexOf(user.id) > -1) {
+						console.log(" *** MATCH USERS ARE ALREADY MATCHED *** ");
 						users.splice(idx, 1);
 						idx++;
 						return;
 					}
 				} catch(e) {
+					console.log(" *** MATCH EXCEPTION WHILE MATCHIG *** ");
 					console.log(e);
 				}
 				if (that._lookingFor.indexOf(user.profileType) == -1) {
+					console.log(" *** USER PROFILE TYPE 1" + user.profileType + " IS NOT INSIDE USER INTEREST *** ");
 					users.splice(idx, 1);
 					idx++;
 					return;
 				}
 				if (user.lookingFor.indexOf(that._profileType) == -1) {
+					console.log(" *** USER PROFILE TYPE 2" + that._profileType + " IS NOT INSIDE USER INTEREST *** ");
 					users.splice(idx, 1);
 					idx++;
 					return;
@@ -76,6 +82,8 @@ module.exports = {
 				} catch (e) {
 					// ignore;
 				}
+				console.log(" *** USER VALID FOR MATCHING *** ");
+				console.log(" *** *** *** *** *** *** *** *** ");
 				idx++;
 			});
 			if (users.length) return res.json(200, users);
