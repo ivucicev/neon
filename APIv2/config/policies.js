@@ -32,7 +32,9 @@ module.exports.policies = {
   },
   UserController: {
     'create': true,
-    'getProfilePicture': true
+    'getProfilePicture': true,
+    'getGalleryImage': true,
+    'countUsers': true
   }
   /***************************************************************************
    *                                                                          *

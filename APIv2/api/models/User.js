@@ -119,6 +119,9 @@ var User = module.exports = {
     matches: {
         type: 'array',
     },
+    newMatches: {
+        type: 'array',
+    },
     gallery: {
       collection: 'gallery',
       via: 'user'

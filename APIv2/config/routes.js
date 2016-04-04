@@ -39,6 +39,12 @@ module.exports.routes = {
   'GET /username-available/:username': 'AuthController.checkUsernameAvailability',
   'POST /login': 'AuthController.login',
   'GET /profile/:id': 'UserController.getProfilePicture',
+  'GET /gallery-image/:id': 'UserController.getGalleryImage',
+  'GET /user/count': 'UserController.countUsers',
+  'GET /like/subscribe/:id': 'LikeController.subscribeAfterLike',
+  'GET /like/get/:id': 'LikeController.likesGet',
+  'GET /like/transfer/:id': 'LikeController.transferNewMatch',
+
   //likes
   'POST /like': 'LikeController.like',
   'GET /match-list/:page': 'MatchController.getMatchList'

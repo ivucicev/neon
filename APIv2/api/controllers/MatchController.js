@@ -9,7 +9,7 @@ module.exports = {
 	_user: '',
 	_lookingFor: [],
 	_profileType: '',
-	_distance: 150,
+	_distance: 500,
 	_usersByPage: 10,
 	getMatchList: function(req, res) {
 		var that = this;
@@ -23,7 +23,13 @@ module.exports = {
 		User.find({
 			id: { '!' : that._user },
 			active: "1",
-			visible: "1"
+			visible: "1",
+			lookingFor: {
+				contains: that._profileType,
+			}
+		},
+		{
+			select: ['id', 'name', 'name_opt', 'age', 'age_opt', 'sex', 'sex_opt', 'profileType', 'lookingFor', 'locationString', 'locationLng', 'locationLat']
 		}).paginate({
 			page: page,
 			limit: that._usersByPage
@@ -56,6 +62,7 @@ module.exports = {
 				try {
 					if (user.locationLng && that._locationLng && user.locationLat && that._locationLat) {
 						var dist = that._calculateDistance(user.locationLat, user.locationLng, that._locationLat, that._locationLng);
+						console.log("distance is: ", dist, dist > that._distance);
 						if (dist) {
 							if ((dist > that._distance)) {
 								users.splice(idx, 1);

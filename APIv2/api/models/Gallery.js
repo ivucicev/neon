@@ -6,7 +6,7 @@
  */
 
 var uuid = require('uuid');
-module.exports = {
+var Gallery = module.exports = {
   attributes: {
     id: {
       type: 'string',
@@ -28,5 +28,11 @@ module.exports = {
     user: {
       model: 'user'
     },
+    toJSON: function() {
+      var gallery = this.toObject();
+      delete gallery.user;
+      delete gallery.image;
+      return gallery;
+    }
   }
 };
