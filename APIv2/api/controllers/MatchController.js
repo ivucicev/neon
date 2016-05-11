@@ -11,6 +11,14 @@ module.exports = {
 	_profileType: '',
 	_distance: 500,
 	_usersByPage: 10,
+	_ageMin: 15,
+	_ageMax: 25,
+	getNewMatches: function(req, res) {
+		User.findOne({id: req.session.user.id}).exec(function(err, user) {
+			if (err) return res.send(500, "Error occured");
+			return res.json(200, user.newMatches);
+		});
+	},
 	getMatchList: function(req, res) {
 		var that = this;
 		var page = parseInt(req.params.page);
@@ -23,75 +31,79 @@ module.exports = {
 		User.find({
 			id: { '!' : that._user },
 			active: "1",
-			visible: "1",
+			visible: "1"/*,
 			lookingFor: {
 				contains: that._profileType,
-			}
+			}*/
 		},
 		{
-			select: ['id', 'name', 'name_opt', 'age', 'age_opt', 'sex', 'sex_opt', 'profileType', 'lookingFor', 'locationString', 'locationLng', 'locationLat']
+			select: ['id', 'name', 'name_opt', 'age', 'age_opt', 'sex', 'sex_opt', 'profileType', 'lookingFor', 'locationString', 'locationLng', 'locationLat', 'isProfilePictureFacebook', 'facebookId']
 		}).paginate({
 			page: page,
 			limit: that._usersByPage
 		}).exec(function(err, users) {
 			if (err) res.send(500, 'Error occured');
 			var idx = 0;
+			var tempUsers = [];
 			users.forEach(function(user) {
-				console.log(user.location);
-				console.log(that._lookingFor, user.profileType, that._lookingFor.indexOf(user.profileType) == -1, user.lookingFor, that._profileType, user.lookingFor.indexOf(that._profileType) == -1);
+				/*console.log(" CURRENT STEP ", idx);
 				console.log(" *** BEGIN MATCH *** ");
 				console.log(" *** USER MATCHING (CURRENT) *** ", that._user, that._profileType, that._lookingFor);
-				console.log(" *** USER TRYING TO MATCH *** ", user.id, user.profileType, user.lookingFor);
+				console.log(" *** USER TRYING TO MATCH *** ", user.id, user.profileType, user.lookingFor, user.name);*/
 				try {
-					if (that._matches.indexOf(user.id) > -1) {
-						console.log(" *** MATCH USERS ARE ALREADY MATCHED *** ");
-						users.splice(idx, 1);
-						idx++;
-						return;
+					if (that._matches.length) {
+						if (that._matches.indexOf(user.id) > -1) {
+							//console.log(" *** MATCH USERS ARE ALREADY MATCHED *** ");
+							idx++;
+							return;
+						}
 					}
 				} catch(e) {
-					console.log(" *** MATCH EXCEPTION WHILE MATCHIG *** ");
-					console.log(e);
+					//console.log(" *** MATCH EXCEPTION WHILE MATCHIG *** ");
+					//console.log(e);
 				}
-				if (that._lookingFor.indexOf(user.profileType) == -1) {
-					console.log(" *** USER PROFILE TYPE 1" + user.profileType + " IS NOT INSIDE USER INTEREST *** ");
-					users.splice(idx, 1);
-					idx++;
-					return;
-				}
-				if (user.lookingFor.indexOf(that._profileType) == -1) {
-					console.log(" *** USER PROFILE TYPE 2" + that._profileType + " IS NOT INSIDE USER INTEREST *** ");
-					users.splice(idx, 1);
-					idx++;
-					return;
+				if (!(that._lookingFor == 'all' && user.lookingFor == 'all')) {
+					if (that._lookingFor != 'all') {
+						if (that._lookingFor != user.profileType) {
+							//console.log(" *** USER PROFILE TYPE 1" + user.profileType + " IS NOT INSIDE USER INTEREST *** ");
+							idx++;
+							return;
+						}
+					}
+					if (user.lookingFor != 'all') {
+						if (user.lookingFor != (that._profileType)) {
+							//console.log(" *** USER PROFILE TYPE 2" + that._profileType + " IS NOT INSIDE USER INTEREST *** ");
+							idx++;
+							return;
+						}
+					}
 				}
 				try {
 					if (user.locationLng && that._locationLng && user.locationLat && that._locationLat) {
-						var dist = that._calculateDistance(user.locationLat, user.locationLng, that._locationLat, that._locationLng);
-						console.log("distance is: ", dist, dist > that._distance);
+						var dist = that._calculateDistance(parseFloat(user.locationLat), parseFloat(user.locationLng), parseFloat(that._locationLat), parseFloat(that._locationLng));
+						//console.log("distance is: ", dist, dist > that._distance);
 						if (dist) {
 							if ((dist > that._distance)) {
-								users.splice(idx, 1);
 								idx++;
 								return;
 							} else {
-								users[idx].distance = Math.round(dist);
+								user.distance = Math.round(dist);
 							}
 						}
 					}
 				} catch (e) {
 					// ignore;
 				}
-				console.log(" *** USER VALID FOR MATCHING *** ");
-				console.log(" *** *** *** *** *** *** *** *** ");
+				tempUsers.push(user);
+				//console.log(" *** USER VALID FOR MATCHING *** ");
+				//console.log(" *** *** *** *** *** *** *** *** ");
 				idx++;
 			});
-			if (users.length) return res.json(200, users);
+			if (tempUsers.length) return res.json(200, tempUsers);
 			return res.json(200, []);
 		});
 	},
 	_calculateDistance: function(lat1, lon1, lat2, lon2) {
-		console.log(lat1, lon1, lat2, lon2);
 		var R = 6371;
 		var dLat = (lat2-lat1) * (Math.PI/180);
 		var dLon = (lon2-lon1) * (Math.PI/180);

@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 var uuid = require('uuid');
- module.exports = {
+var Conversation = module.exports = {
     attributes: {
         id: {
           type: 'string',
@@ -15,17 +15,36 @@ var uuid = require('uuid');
             return uuid.v4();
           }
         },
+        active: {
+            type: 'int',
+            enum: [0, 1],
+            defaultsTo: 0
+        },
         users: {
             type: 'array',
             required: true
         },
-        newMessage: {
+        latestMessage: {
             type: 'string',
             defaultsTo: null
+        },
+        latestMessageFrom: {
+            type: 'string',
+            required: true
+        },
+        isLatestMessageNew: {
+            type: 'int',
+            enum: [0, 1],
+            defaultsTo: 1
         },
         messages: {
             collection: 'message',
             via: 'conversation'
         },
+        toJSON: function() {
+          var conversations = this.toObject();
+          delete conversations.messages;
+          return conversations;
+        }
     }
  };

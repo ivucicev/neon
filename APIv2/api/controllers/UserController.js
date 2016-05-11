@@ -9,7 +9,7 @@ module.exports = {
     getProfilePicture: function(req, res) {
         User.findOne({id: req.params.id}).exec(function(err, user) {
             if (err) return res.send(404, 'Not found');
-            if (user.length) {
+            try {
                 if (user.profilePicture) {
                     var ext = '';
                     if (user.profilePicture.indexOf('png')) {
@@ -28,7 +28,9 @@ module.exports = {
                     });
                     res.end(img);
                 } else return res.send(404, 'Not found');
-            } else return res.send(404, 'Not found');
+            } catch (e) {
+                return res.send(404, 'Not found');
+            }
         });
     },
     getGalleryImage: function(req, res) {

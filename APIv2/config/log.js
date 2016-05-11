@@ -9,7 +9,21 @@
  * For more information on the Sails logger, check out:
  * http://sailsjs.org/#!/documentation/concepts/Logging
  */
+ /*var winston = require('winston');
+ var customLogger = new winston.Logger();
 
+ // A console transport logging debug and above.
+ customLogger.add(winston.transports.Console, {
+   level: 'debug',
+   colorize: true
+ });
+
+ // A file based transport logging only errors formatted as json.
+ customLogger.add(winston.transports.File, {
+   level: 'error',
+   filename: 'error.log',
+   json: true
+ });*/
 module.exports.log = {
 
   /***************************************************************************
@@ -25,5 +39,12 @@ module.exports.log = {
   ***************************************************************************/
 
   // level: 'info'
+
+    // Pass in our custom logger, and pass all log levels through.
+    //custom: customLogger,
+    level: 'info',
+
+    // Disable captain's log so it doesn't prefix or stringify our meta data.
+    //inspect: false
 
 };

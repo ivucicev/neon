@@ -47,7 +47,16 @@ module.exports.routes = {
 
   //likes
   'POST /like': 'LikeController.like',
-  'GET /match-list/:page': 'MatchController.getMatchList'
+  'GET /match-list/:page': 'MatchController.getMatchList',
+  'GET /new-matches': 'MatchController.getNewMatches',
+  'POST /send-message': 'ChatController.sendMessage',
+  'GET /conversations/subscribe/:id': 'ChatController.subscribeForConversations',
+  'GET /get-conversation-list': 'ChatController.getConversationList',
+  'GET /remove-covversation-messages/:id': 'ChatController.removeConversation',
+  'GET /read-messages/:id': 'ChatController.readMessages',
+  'GET /password-reset/:email': 'AuthController.passwordReset',
+  'GET /password-reset-confirm/:hash': 'AuthController.passwordResetConfirm',
+  'GET /account-confirm/:id/:hash': 'AuthController.confirmAccount'
   /***************************************************************************
    *                                                                          *
    * Custom routes here...                                                    *
