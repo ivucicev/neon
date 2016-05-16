@@ -113,6 +113,11 @@ var User = module.exports = {
         locationString: {
             type: 'string'
         },
+        locationRange: {
+            type: 'int',
+            max: 500,
+            min: 1
+        },
         visible: {
             type: 'int',
             enum: [0, 1],
@@ -142,7 +147,7 @@ var User = module.exports = {
             defaultsTo: 0
         },
         deviceToken: {
-            type: 'string',
+            type: 'string'
         },
         passwordResetHashLink: {
             type: 'string',
@@ -154,6 +159,9 @@ var User = module.exports = {
             defaultsTo: function() {
                 return uuid.v4();
             }
+        },
+        premiumExpires: {
+            type: 'int'
         },
         toJSON: function() {
             var user = this.toObject();

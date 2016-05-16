@@ -28,6 +28,12 @@ module.exports = {
 		this._locationLat = req.session.user.locationLat;
 		this._locationLng = req.session.user.locationLng;
 		this._matches = req.session.user.matches;
+		try {
+			that._distance = req.session.user.locationRange ? req.session.user.locationRange : 500;
+		} catch (e) {
+			// ignore for now
+		}
+
 		User.find({
 			id: { '!' : that._user },
 			active: "1",
@@ -83,7 +89,7 @@ module.exports = {
 						var dist = that._calculateDistance(parseFloat(user.locationLat), parseFloat(user.locationLng), parseFloat(that._locationLat), parseFloat(that._locationLng));
 						//console.log("distance is: ", dist, dist > that._distance);
 						if (dist) {
-							if ((dist > that._distance)) {
+							if ((dist > that._distance) && that._distance < 500) {
 								idx++;
 								return;
 							} else {

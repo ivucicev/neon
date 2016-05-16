@@ -109,7 +109,6 @@ module.exports = {
                 session: false
             }, function(err, user, info) {
                 if (err || !user) {
-                    res.set("WWW-Authenticate", "Basic realm=\"Restricted\"");
                     return res.send(401, "Invalid username/password combination");
                 }
                 if (parseInt(user.confirmed)) {

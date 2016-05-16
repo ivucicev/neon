@@ -15,7 +15,6 @@ module.exports = function(req, res, ok) {
     session: false
   }, function(err, user, info) {
     if (err || !user) {
-      res.set("WWW-Authenticate", "Basic realm=\"Restricted\"");
       return res.send("You are not permitted to perform this action", 401);
     }
     req.session.user = user;
