@@ -24,6 +24,14 @@ var Conversation = module.exports = {
             type: 'array',
             required: true
         },
+        user1: {
+            type: 'string',
+            required: true
+        },
+        user2: {
+            type: 'string',
+            required: true
+        },
         latestMessage: {
             type: 'string',
             defaultsTo: null

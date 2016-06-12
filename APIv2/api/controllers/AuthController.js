@@ -27,7 +27,7 @@ module.exports = {
         var that = this;
         var nodemailer = require('nodemailer');
         // create reusable transporter object using the default SMTP transport
-        var transporter = nodemailer.createTransport('smtps://davorin@neondating.com:Davorin14Neon@smtp.gmail.com');
+        var transporter = nodemailer.createTransport('smtps://noreply@neondating.com:love101@gator4122.hostgator.com');
         var pass = that._generateHash();
         // setup e-mail data with unicode symbols
         var mailOptions = {
@@ -35,7 +35,7 @@ module.exports = {
             to: req.params.email, // list of receivers
             subject: 'Password reset link', // Subject line
             text: '', // plaintext body
-            html: 'Hello Dear Neon App user, click on link to reset your password<br/> <b><a href="http://52.28.69.109:1337/password-reset-confirm/' + pass + '">Password Reset Link</a></b>' // html body
+            html: 'Hello Dear Neon App user, click on link to reset your password<br/> <b><a href="http://52.58.51.82:1337/password-reset-confirm/' + pass + '">Password Reset Link</a></b>' // html body
         };
         User.update({email: req.params.email}, {passwordResetHashLink: pass}).exec(function(err, user){
             if (err) return res.send(500, 'Error occured');
@@ -51,7 +51,7 @@ module.exports = {
         var that = this;
         var nodemailer = require('nodemailer');
         // create reusable transporter object using the default SMTP transport
-        var transporter = nodemailer.createTransport('smtps://davorin@neondating.com:Davorin14Neon@smtp.gmail.com');
+        var transporter = nodemailer.createTransport('smtps://noreply@neondating.com:love101@gator4122.hostgator.com');
         var pass = that._generatePassword();
         // setup e-mail data with unicode symbols
         User.findOne({passwordResetHashLink: req.params.hash}).exec(function(err, user) {
@@ -65,19 +65,20 @@ module.exports = {
                     html: 'Hello Dear Neon App user, this is your temporary password. <strong>Please change it immedeately.</strong> <br/><br/> <b>' + pass + '</b>' // html body
                 };
                 User.update({id: user.id}, {passwordResetHashLink: that._generateHash(), password: pass}).exec(function(err, updated) {
-                    if (err) res.send("This link has expired");
+                    if (err) res.send("This link has expired. You will be redirected shortly.<script type='text/javascript'>setTimeout(function() { window.location.href = 'http://www.neondating.com'; }, 3000);</script>");
                     transporter.sendMail(mailOptions, function(error, info) {});
-                    return res.send("Temporary password has been sent to you email address. <strong>Please change it immedeately.</strong>");
+                    return res.send("Temporary password has been sent to you email address. <strong>Please change it immedeately.</strong><br>. You will be redirected shortly.<script type='text/javascript'>setTimeout(function() { window.location.href = 'http://www.neondating.com'; }, 3000);</script>");
                 });
             } else {
-                return res.send("This link has expired");
+                return res.send("This link has expired. You will be redirected shortly.<script type='text/javascript'>setTimeout(function() { window.location.href = 'http://www.neondating.com'; }, 3000);</script>");
             }
         });
     },
     confirmAccount: function(req, res) {
-        User.update({id: req.params.id, accountConfirmToken: req.params.hash}, {confirmed: 1}).exec(function(err, updated) {
-            if (err) return res.send("This link has expired");
-            return res.send("Your account is now activated");
+        var self = this;
+        User.update({id: req.params.id, accountConfirmToken: req.params.hash}, {confirmed: 1, accountConfirmToken: self._generateHash()}).exec(function(err, updated) {
+            if (err) return res.send("This link has expired. You will be redirected shortly.<script type='text/javascript'>setTimeout(function() { window.location.href = 'http://www.neondating.com'; }, 3000);</script>");
+            return res.send("Your account is now activated. You will be redirected shortly.<script type='text/javascript'>setTimeout(function() { window.location.href = 'http://www.neondating.com'; }, 3000);</script>");
         });
     },
     checkEmailAvailability: function(req, res) {
@@ -119,7 +120,7 @@ module.exports = {
                 } else {
                     return res.json(200, {
                         status: 7,
-                        message: "Account not confirmed yet."
+                        message: "Account not confirmed yet. Check your email."
                     });
                 }
             })(req, res);

@@ -20,22 +20,22 @@ var User = module.exports = {
         email: {
             type: 'email',
             unique: true,
-            required: true,
-            regex: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/
+            required: true
+            //regex: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/
         },
         username: {
             type: 'string',
             unique: true,
             required: true,
-            maxLength: 16,
-            minLength: 6,
-            regex: /^[a-zA-Z]+[a-zA-Z0-9_]{6,16}$/
+            maxLength: 50,
+            minLength: 3
+            //regex: /^[a-zA-Z]+[a-zA-Z0-9_]{6,16}$/
         },
         password: {
             type: 'string',
             required: true,
             minLength: 4,
-            regex: /^[a-zA-Z0-9!@#$%^&*]{4,}$/
+            //regex: /^[a-zA-Z0-9!@#$%^&*]{4,}$/
         },
         profileType: {
             type: 'string',
@@ -184,16 +184,22 @@ var User = module.exports = {
          **********************************/
         var nodemailer = require('nodemailer');
         // create reusable transporter object using the default SMTP transport
-        var transporter = nodemailer.createTransport('smtps://davorin@neondating.com:Davorin14Neon@smtp.gmail.com');
+        var transporter = nodemailer.createTransport('smtps://noreply@neondating.com:love101@gator4122.hostgator.com');
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: 'noreply@neondating.com', // sender address
             to: newUser.email, // list of receivers
             subject: 'Account Activation', // Subject line
             text: '', // plaintext body
-            html: 'Hello Dear Neon App user, click on link to activate your account<br/> <b><a href="http://52.28.69.109:1337/account-confirm/' + newUser.id + '/' + newUser.accountConfirmToken + '">Confirm account</a></b>' // html body
+            html: 'Hello Dear Neon App User, click on link to activate your account<br/> <b><a href="http://52.58.51.82:1337/account-confirm/' + newUser.id + '/' + newUser.accountConfirmToken + '">Confirm account</a></b>' // html body
         };
-        transporter.sendMail(mailOptions, function(error, info) {});
+        try {
+            if (newUser.confirmed === "0" || newUser.confirmed === 0) {
+                transporter.sendMail(mailOptions, function(error, info) {});
+            }
+        } catch (e) {
+            // do nothing
+        }
         next();
          /**********************************
           ****END FOR ACCOUNT CONFIRMATION *

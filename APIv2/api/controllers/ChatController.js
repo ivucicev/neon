@@ -13,18 +13,32 @@ module.exports = {
 			var self = this;
 			Conversation
 				.findOne()
-				.where({users: {contains: data.to}})
-				.where({users: {contains: data.from}})
+				.where({
+					or: [
+						{
+							user1: data.to,
+							user2: data.from
+						},
+						{
+							user1: data.from,
+							user2: data.to
+						}
+					]
+				})
 				.exec(function(err, conv) {
 					if (err) return res.send(500, 'Error occured');
 					if (conv) {
 						//conversation already exists, create message
+						console.log("Conversation exists ", conv.id);
 						self._createMessage(data.to, data.from, data.message, conv.id);
 					} else {
 						//conversation does not exist, create one
+						console.log("conversation does not exist, create one");
 						Conversation.create({
 							active: 1,
 							users: [data.to, data.from],
+							user1: data.to,
+							user2: data.from,
 							latestMessage: data.message,
 							latestMessageFrom: data.from,
 							isLatestMessageNew: 1

@@ -1,0 +1,10 @@
+{
+    "type": "sftp",
+    "host": "52.58.51.82",
+    "username": "ubuntu",
+    "password": "",
+    "port": 22,
+    "sshKeyFile": "C:/Users/ivuci/Desktop/digiheyAWS.pem",
+    "remotePath": "neon",
+    "uploadOnSave": true
+}

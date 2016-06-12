@@ -1,0 +1,31 @@
+curl -u d5627390a10c18b59791799c9f199b0280524181d046f6a4: -H
+"Content-Type: application/json" -H
+"X-Ionic-Application-Id: e7d81e5a" https://push.ionic.io/api/v1/push -d
+'{
+    "tokens":
+        ["fsU_w5-b7js:APA91bE57ws1tMld3MERDvaby_XypK2EJhFHvHpnjjZadR8uOqOflnx9qhn-lJhwUaBPjWDUAZEa4eV51JyZZWTIYRKZHW09oerEWnVMc6RbTC1Gw_OSzChwAilgQqRjAccEnhdrZ4dg"],
+    "production": false,
+    "notification":
+    { "alert":"ewsddsffds", "title": "dfgdfg", 
+        "android":
+        {
+            "payload":
+            {
+                "event": "chat",
+                "conversation": "123",
+                "from": "345",
+                "message": "lkjdsaf ksdajf lčksj člaksf"
+            }
+        },
+        "ios":
+        {
+            "payload":
+            {
+                "event": "chat",
+                "conversation": "123",
+                "from": "345",
+                "message": "lkjdsaf ksdajf lčksj člaksf"
+            }
+        }
+    }
+}'
